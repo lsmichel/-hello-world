@@ -17,23 +17,11 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run:
-          command: find . -name 'pom.xml' | sort | xargs cat > /tmp/maven_cache_seed
-          working_directory: ~/project/my-app
-      - restore_cache:
-          key: circleci-java-maven-{{ checksum "/tmp/maven_cache_seed" }}
       - run: 
           name: build
           command: mvn package -DskipTests
-          working_directory: ~/project/my-app          
-      - save_cache:
-          paths:
-            - ~/.m2/repository
-          key: circleci-java-maven-{{ checksum "/tmp/maven_cache_seed" }}
-      - store_test_results:
-          path: ~/project/my-app/target/surefire-reports
       - store_artifacts:
-          path: ~/project/my-app/target/my-app-1.0-SNAPSHOT.jar
+          path: /target/sys-userstore-SNAPSHOT.jar
       
 
 
