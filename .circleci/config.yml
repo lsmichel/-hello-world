@@ -32,7 +32,7 @@ jobs:
           name: build
           command: mvn package -DskipTests
       - store_artifacts:
-          path: /target
+          path: target
           destination: mule-sys-userstore
       
 
