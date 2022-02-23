@@ -17,20 +17,25 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
-      # Checkout the code as the first step.
+      steps:
       - checkout
-      # Use mvn clean and package as the standard maven build phase
       - run:
-          name: Build
-          command: mvn -B -DskipTests clean package
-          working_directory: /tmp
-          
-      # Then run your tests!
-      - run:
-          name: Test
-          command: mvn test
+          command: find . -name 'pom.xml' | sort | xargs cat > /tmp/maven_cache_seed
+          working_directory: ~/project/my-app
+      - restore_cache:
+          key: circleci-java-maven-{{ checksum "/tmp/maven_cache_seed" }}
+      - run: 
+          name: build
+          command: mvn package -DskipTests
+          working_directory: ~/project/my-app          
+      - save_cache:
+          paths:
+            - ~/.m2/repository
+          key: circleci-java-maven-{{ checksum "/tmp/maven_cache_seed" }}
+      - store_test_results:
+          path: ~/project/my-app/target/surefire-reports
       - store_artifacts:
-          path: /tmp/sys-userstore-1.0-SNAPSHOT.jar
+          path: ~/project/my-app/target/my-app-1.0-SNAPSHOT.jar
       
 
 
@@ -40,4 +45,4 @@ workflows:
   sample: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - build-and-test
+      - build
