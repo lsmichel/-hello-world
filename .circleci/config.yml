@@ -13,15 +13,26 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
       - image: cimg/openjdk:11.0
+    working_directory: ~/mule-sys-userstore
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - mule-sys-userstore-{{ checksum "pom.xml" }}
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: mule-sys-userstore-{{ checksum "pom.xml" }}
       - run: 
           name: build
           command: mvn package -DskipTests
       - store_artifacts:
-          path: /target/sys-userstore-SNAPSHOT.jar
+          path: /target
       
 
 
