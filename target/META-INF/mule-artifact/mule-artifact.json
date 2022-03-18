@@ -1,0 +1,36 @@
+{
+  "configs": [
+    "api/global.xml",
+    "api/implementation.xml",
+    "api/user/post-users.xml",
+    "api/user/post-users-callback.xml",
+    "api/sys-userstoreapi.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:sys-userstore:1.0.0-SNAPSHOT",
+  "minMuleVersion": "4.4.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "api/global.xml",
+        "api/implementation.xml",
+        "api/library/user/user-to-create.raml",
+        "api/library/user/user.raml",
+        "api/sys-userstoreapi.raml",
+        "api/sys-userstoreapi.xml",
+        "api/user/post-users-callback.xml",
+        "api/user/post-users.xml",
+        "application-types.xml",
+        "log4j2.xml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

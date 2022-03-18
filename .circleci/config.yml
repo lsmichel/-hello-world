@@ -14,7 +14,7 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
         environment:
-          MULE_VERSION: 4.4.4
+          MULE_VERSION: 4.4.0
           MULE_APP_NAME: sys-userstore
           MULE_ENV: Sandbox
           MULE_WORKER_TYP: MICRO
@@ -42,7 +42,7 @@ jobs:
           destination: mule-sys-userstore
       - run: 
           name: deploy
-          command:  mvn   deploy -DskipTests -s settings.xml -DmuleDeploy -DMULE_ENV=${MULE_ENV} -DMULE_VERSION=${MULE_VERSION} -DMULE_APP_NAME=${MULE_APP_NAME} -DMULE_WORKER_TYP=${MULE_WORKER_TYP} -DMULE_WORKER=${MULE_WORKER} -DMULE_USERNAME=${MULE_USERNAME}
+          command:  mvn   deploy -DskipTests -s settings.xml -DmuleDeploy -DMULE_ENV=${MULE_ENV} -DMULE_VERSION=${MULE_VERSION} -DMULE_APP_NAME=${MULE_APP_NAME} -DMULE_WORKER_TYP=${MULE_WORKER_TYP} -DMULE_WORKER=${MULE_WORKER} 
       
 
 
