@@ -13,6 +13,12 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
       - image: cimg/openjdk:11.0
+        environment:
+          MULE_VERSION: 4.4.4
+          MULE_APP_NAME: sys-userstore
+          MULE_ENV: Sandbox
+          MULE_WORKER_TYP: MICRO
+          MULE_WORKER: 1
     working_directory: ~/mule-sys-userstore
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
@@ -30,10 +36,13 @@ jobs:
           key: mule-sys-userstore-{{ checksum "pom.xml" }}
       - run: 
           name: build
-          command: mvn package -DskipTests
+          command: mvn package -DskipTests -s settings.xml
       - store_artifacts:
           path: target
           destination: mule-sys-userstore
+      - run: 
+          name: deploy
+          command:  mvn   deploy -DskipTests -s settings.xml -DmuleDeploy -DMULE_ENV=${MULE_ENV} -DMULE_VERSION=${MULE_VERSION} -DMULE_APP_NAME=${MULE_APP_NAME} -DMULE_WORKER_TYP=${MULE_WORKER_TYP} -DMULE_WORKER=${MULE_WORKER} -DMULE_USERNAME=${MULE_USERNAME}
       
 
 
