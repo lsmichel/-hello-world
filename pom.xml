@@ -42,28 +42,26 @@
 					</sharedLibraries>
 				</configuration>
 			</plugin>
-			 <plugin>
-    <groupId>org.mule.tools.maven</groupId>
-    <artifactId>mule-maven-plugin</artifactId>
-    <version>${mule.maven.plugin.version}</version>
-    <extensions>true</extensions>
-    <configuration>
-     <cloudHubDeployment>
-          <uri>https://anypoint.mulesoft.com</uri>
-          <muleVersion>${MULE_VERSION}</muleVersion>
-          <username>${cloud_hub_user_name}</username>
-          <password>${cloud_hub_password}</password>
-          <applicationName>${MULE_APP_NAME}</applicationName>
-          <environment>${MULE_ENV}</environment>
-          <workers>${MULE_WORKER}</workers>
-          <workerType>${MULE_WORKER_TYP}</workerType>
-		  <objectStoreV2>true</objectStoreV2>
-          <properties>
-            <key>value</key>
-          </properties>
-        </cloudHubDeployment>
-    </configuration>
-   </plugin>
+			<plugin>
+  <groupId>org.mule.tools.maven</groupId>
+  <artifactId>mule-maven-plugin</artifactId>
+  <version>3.5.4</version>
+  <extensions>true</extensions>
+  <configuration>
+    <armDeployment>
+      <muleVersion>4.4.0</muleVersion>
+      <uri>https://anypoint.mulesoft.com</uri>
+      <target>custom-node1</target>
+      <targetType>Server</targetType>
+      <username>NijiLsmichel</username>
+      <password>@Ghamha123</password>
+      <environment>Sandbox</environment>
+      <properties>
+        <key>value</key>
+      </properties>
+    </armDeployment>
+  </configuration>
+</plugin>
 		</plugins>
 	</build>
 
